@@ -84,7 +84,17 @@ public class PhoneBook {
         }
 
         List<Contact> listaOrdenada = new ArrayList<>(contacts);
-        Collections.sort(listaOrdenada);
+        listaOrdenada.sort((c1, c2) -> {
+            int resultado = c1.getFirstName()
+                    .compareToIgnoreCase(c2.getFirstName());
+
+            if (resultado == 0) {
+                resultado = c1.getLastName()
+                        .compareToIgnoreCase(c2.getLastName());
+            }
+
+            return resultado;
+        });
 
         System.out.println("\n--- LISTA DE CONTACTOS (Orden Alfabético) ---");
         for (Contact c : listaOrdenada) {
