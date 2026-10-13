@@ -88,7 +88,7 @@ public class PhoneBook {
 
         System.out.println("\n--- LISTA DE CONTACTOS (Orden Alfabético) ---");
         for (Contact c : listaOrdenada) {
-            System.out.println(c.getNombre() + " " + c.getApellido() + " - " + c.getTelefono());
+            System.out.println(c.getFirstName() + " " + c.getLastName() + " - " + c.getPhoneNumber());
         }
         System.out.println("---------------------------------------------");
     }
@@ -98,10 +98,10 @@ public class PhoneBook {
         boolean encontrado = false;
 
         for (Contact c : contacts) {
-            if (c.getNombre().equalsIgnoreCase(nombre)
-                    && c.getApellido().equalsIgnoreCase(apellido)) {
+            if (c.getFirstName().equalsIgnoreCase(nombre)
+                    && c.getLastName().equalsIgnoreCase(apellido)) {
 
-                System.out.println("Contacto encontrado -> Teléfono: " + c.getTelefono());
+                System.out.println("Contacto encontrado -> Teléfono: " + c.getPhoneNumber());
                 encontrado = true;
                 break;
             }
@@ -131,10 +131,10 @@ public class PhoneBook {
 
         for (Contact c : contacts) {
 
-            if (c.getNombre().equalsIgnoreCase(nombre)
-                    && c.getApellido().equalsIgnoreCase(apellido)) {
+            if (c.getFirstName().equalsIgnoreCase(nombre)
+                    && c.getLastName().equalsIgnoreCase(apellido)) {
 
-                c.setTelefono(nuevoTelefono);
+                c.setPhoneNumber(nuevoTelefono);
 
                 System.out.println(
                         "Teléfono modificado exitosamente para "
