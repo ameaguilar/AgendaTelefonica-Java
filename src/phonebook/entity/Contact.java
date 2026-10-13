@@ -1,5 +1,5 @@
 package phonebook.entity;
-import
+import java.util.Objects;
 
 /** Represents a person stored in the phone book. */
 public class Contact {
@@ -9,12 +9,8 @@ public class Contact {
 
     //constructor
         public Contact(String firstName, String lastName, String phoneNumber) {
-            if (firstName != null && !firstName.trim().isEmpty()) {
-                this.firstName = firstName.trim();
-            }
-            if (lastName != null && !lastName.trim().isEmpty()) {
-                this.lastName = lastName.trim();
-            }
+            setFirstName(firstName);
+            setLastName(lastName);
             this.phoneNumber = phoneNumber;
         } // constructor Contact
 
@@ -23,9 +19,10 @@ public class Contact {
         } // getFirstName
 
         public void setFirstName(String firstName) {
-            if (firstName != null && !firstName.trim().isEmpty()) {
-                this.firstName = firstName.trim();
+            if (firstName == null || firstName.isBlank()) {
+                throw new IllegalArgumentException("El nombre no puede ser nulo o vacío");
             }
+            this.firstName = firstName.trim();
         } //setFirstName
 
         public String getLastName() {
@@ -33,9 +30,10 @@ public class Contact {
         } // getLastName
 
         public void setLastName(String lastName) {
-            if (lastName != null && !lastName.trim().isEmpty()) {
-                this.lastName = lastName.trim();
+            if (lastName == null || lastName.isBlank()) {
+                throw new IllegalArgumentException("El apellido no puede ser nulo o vacío");
             }
+            this.lastName = lastName.trim();
         } //setLastName
 
         public String getPhoneNumber() {
@@ -45,5 +43,22 @@ public class Contact {
         public void setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
         } // setPhoneNumber
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return firstName.equalsIgnoreCase(contact.firstName)
+                && lastName.equalsIgnoreCase(contact.lastName);
+    } // equals
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                firstName.toLowerCase(),
+                lastName.toLowerCase()
+        );
+    } // hashCode
 
 }//class Contact
