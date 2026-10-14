@@ -9,6 +9,8 @@ import java.util.Collections;
 // Gestión de contactos y capacidad máxima de la agenda telefónica
 public class PhoneBook {
 
+
+
     private static final int DEFAULT_CAPACITY = 10;
 
     // Capacidad máxima permitida
@@ -50,7 +52,7 @@ public class PhoneBook {
 
     // ========== MÉTODO addContact() ==========
     // Agregar un contacto validando capacidad y duplicados
-    public void addContact(Contact contact) {
+    public void  addContact(Contact contact) {
 
         // Valida si ya no hay espacio disponible
         if (agendaFull()) {
