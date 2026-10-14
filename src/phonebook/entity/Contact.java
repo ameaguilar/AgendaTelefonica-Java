@@ -25,7 +25,7 @@ public class Contact {
     public void setFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) {
             throw new IllegalArgumentException(
-                    "First name cannot be empty."
+                    "El nombre no puede estar vacio."
             );
         }
         this.firstName = firstName.trim();
@@ -40,7 +40,7 @@ public class Contact {
     public void setLastName(String lastName) {
         if (lastName == null || lastName.trim().isEmpty()) {
             throw new IllegalArgumentException(
-                    "Last name cannot be empty."
+                    "El apellido no puede estar vacio."
             );
         }
         this.lastName = lastName.trim();
