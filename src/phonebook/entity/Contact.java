@@ -1,49 +1,84 @@
 package phonebook.entity;
-import
 
-/** Represents a person stored in the phone book. */
+import java.util.Locale;
+import java.util.Objects;
+
 public class Contact {
+
     private String firstName;
     private String lastName;
     private String phoneNumber;
 
-    //constructor
-        public Contact(String firstName, String lastName, String phoneNumber) {
-            if (firstName != null && !firstName.trim().isEmpty()) {
-                this.firstName = firstName.trim();
-            }
-            if (lastName != null && !lastName.trim().isEmpty()) {
-                this.lastName = lastName.trim();
-            }
-            this.phoneNumber = phoneNumber;
-        } // constructor Contact
+    // Constructor
+    public Contact(String firstName, String lastName, String phoneNumber) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        this.phoneNumber = phoneNumber;
+    }
 
-        public String getFirstName() {
-            return firstName;
-        } // getFirstName
+    // Devuelve el nombre
+    public String getFirstName() {
+        return firstName;
+    }
 
-        public void setFirstName(String firstName) {
-            if (firstName != null && !firstName.trim().isEmpty()) {
-                this.firstName = firstName.trim();
-            }
-        } //setFirstName
+    // Establece el nombre y evita valores nulos o vacíos
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "First name cannot be empty."
+            );
+        }
+        this.firstName = firstName.trim();
+    }
 
-        public String getLastName() {
-            return lastName;
-        } // getLastName
+    // Devuelve el apellido
+    public String getLastName() {
+        return lastName;
+    }
 
-        public void setLastName(String lastName) {
-            if (lastName != null && !lastName.trim().isEmpty()) {
-                this.lastName = lastName.trim();
-            }
-        } //setLastName
+    // Establece el apellido y evita valores nulos o vacíos
+    public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Last name cannot be empty."
+            );
+        }
+        this.lastName = lastName.trim();
+    }
 
-        public String getPhoneNumber() {
-            return phoneNumber;
-        } //getPhoneNumber
+    // Devuelve el teléfono
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-        } // setPhoneNumber
+    // Modifica el teléfono sin validar su formato
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-}//class Contact
+    // Compara contactos por nombre y apellido, ignorando mayúsculas
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Contact)) {
+            return false;
+        }
+
+        Contact other = (Contact) obj;
+
+        return firstName.equalsIgnoreCase(other.firstName)
+                && lastName.equalsIgnoreCase(other.lastName);
+    }
+
+    // Genera un código hash coherente con equals()
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                firstName.toLowerCase(Locale.ROOT),
+                lastName.toLowerCase(Locale.ROOT)
+        );
+    }
+} // class contact
