@@ -4,6 +4,7 @@ import phonebook.entity.Contact;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.Locale;
 
 // ========== ATRIBUTOS ==========
 // Gestión de contactos y capacidad máxima de la agenda telefónica
@@ -100,7 +101,7 @@ public class PhoneBook {
 
         System.out.println("\n--- LISTA DE CONTACTOS (Orden Alfabético) ---");
         for (Contact c : listaOrdenada) {
-            System.out.println(c.getFirstName() + " " + c.getLastName() + " - " + c.getPhoneNumber());
+            System.out.println(c.getFirstName().toLowerCase(Locale.ROOT) + " " + c.getLastName().toLowerCase(Locale.ROOT) + " - " + c.getPhoneNumber());
         }
         System.out.println("---------------------------------------------");
     }
