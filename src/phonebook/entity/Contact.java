@@ -13,7 +13,7 @@ public class Contact {
     public Contact(String firstName, String lastName, String phoneNumber) {
         setFirstName(firstName);
         setLastName(lastName);
-        this.phoneNumber = phoneNumber;
+        setPhoneNumber(phoneNumber);
     }
 
     // Devuelve el nombre
@@ -51,9 +51,20 @@ public class Contact {
         return phoneNumber;
     }
 
+
+    // Valida número de teléfono (10 dígitos)
+    public boolean isValidPhoneNumber (String phoneNumber) {
+        return phoneNumber != null && phoneNumber.matches("\\d{10}");
+
+    }
+
     // Modifica el teléfono sin validar su formato
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        if (isValidPhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            System.out.println("Formato inválido. El teléfono debe tener 10 dígitos.");
+        }
     }
 
     // Compara contactos por nombre y apellido, ignorando mayúsculas
