@@ -1,12 +1,15 @@
 package phonebook.app;
-import java.util.Scanner;
 
+import java.util.Scanner;
+import phonebook.entity.Contact;
+import phonebook.service.PhoneBook;
 
 public class ConsoleMenu {
 
     private Scanner sc; //se declara sc como atributo para poder ser utilizado en varios metodos
+    private PhoneBook phoneBook = new PhoneBook(); // instancia de Agenda
 
-    private ConsoleMenu() {
+    public ConsoleMenu() {
 
         sc = new Scanner(System.in);
 
@@ -26,7 +29,7 @@ public class ConsoleMenu {
 
     } // metodo que lee la opcion ingresada por el escaner
 
-    private void showMenu () {
+    public void showMenu () {
 
         System.out.println("====== PHONE BOOK ======");
         System.out.println("1.- Agregar Contacto");
@@ -37,8 +40,8 @@ public class ConsoleMenu {
         System.out.println("6.- Modificar número de teléfono");
         System.out.println("7.- Verificar si agenda está llena");
         System.out.println("8.- Verificar espacios disponibles");
-        System.out.println("9.- Salir");
-        System.out.println("Elige una opción: ");
+        System.out.println("0.- Salir");
+        System.out.print("Elige una opción: ");
 
     } // metodo que muetra las opciones disponibles
 
@@ -51,39 +54,86 @@ public class ConsoleMenu {
 
             switch (option) {
 
-                case 1:
-                    System.out.println("Agregar contacto seleccionado.");
-                    break;
+                case 1: {
+                    System.out.print("Nombre: ");
+                    String firstName = sc.nextLine();
 
-                case 2:
+                    System.out.print("Apellido: ");
+                    String lastName = sc.nextLine();
+
+                    System.out.print("Teléfono: ");
+                    String phoneNumber = sc.nextLine();
+
+                    Contact contact = new Contact(firstName, lastName, phoneNumber);
+                    phoneBook.addContact(contact);
+                    break;
+                }
+                case 2: {
                     System.out.println("Verifica contacto seleccionado");
-                    break;
+                    System.out.print("\n Nombre: ");
+                    String firstName = sc.nextLine();
 
-                case 3:
+                    System.out.print("Apellido: ");
+                    String lastName = sc.nextLine();
+                    Contact contact = new Contact(firstName, lastName, "");
+                    System.out.print(phoneBook.existsContact(contact)
+                                    ? "El contacto existe"
+                                    : "El contacto no existe");
+                    break;
+                }
+                case 3: {
                     System.out.println("Lista de contactos seleccionados");
+                    phoneBook.listarContactos();
                     break;
-
-                case 4:
+                }
+                case 4: {
                     System.out.println("Buscar contacto seleccionado");
-                    break;
+                    System.out.print("Nombre: ");
+                    String firstName = sc.nextLine();
 
-                case 5:
+                    System.out.print("Apellido: ");
+                    String lastName = sc.nextLine();
+
+                    phoneBook.buscaContacto(firstName,lastName);
+                    break;
+                }
+                case 5: {
                     System.out.println("Eliminar contacto seleccionado");
-                    break;
+                    System.out.print("Nombre: ");
+                    String firstName = sc.nextLine();
 
-                case 6:
+                    System.out.print("Apellido: ");
+                    String lastName = sc.nextLine();
+                    Contact contact = new Contact(firstName, lastName, "");
+                    phoneBook.eliminarContacto(contact);
+                    break;
+                }
+                case 6: {
                     System.out.println("Modifica teléfono de contacto");
-                    break;
+                    System.out.print("Nombre: ");
+                    String firstName = sc.nextLine();
 
-                case 7:
+                    System.out.print("Apellido: ");
+                    String lastName = sc.nextLine();
+
+                    System.out.print("Nuevo teléfono: ");
+                    String newPhoneNumber = sc.nextLine();
+
+                    phoneBook.modificarTelefono(firstName, lastName, newPhoneNumber);
+                    break;
+                }
+                case 7: {
                     System.out.println("Revisa agenda llena");
+                    System.out.println(phoneBook.agendaFull()
+                                        ? "La agenda está llena"
+                                        : "La agenda aún tiene espacio");
                     break;
-
+                }
                 case 8:
-                    System.out.println("Revisa espacio en agenda disponible");
+                    System.out.println("Espacio disponible" + phoneBook.freeSpaces());
                     break;
 
-                case 9:
+                case 0:
                     System.out.println("Salir de agenda");
                     break;
 
